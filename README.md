@@ -1,0 +1,1 @@
+Welcome to this repository! Here, you will find various R programs covering different statistical and analytical topics. These scripts are designed to help with data processing, visualization, and statistical analysis.
