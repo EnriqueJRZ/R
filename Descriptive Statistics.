@@ -1,0 +1,34 @@
+principal<-function(data, variance) {
+  url <- 'https://raw.githubusercontent.com/fhernanb/datos/master/medidas_cuerpo'
+  data <- read.table(file=url, header=TRUE)
+  weights <- split(data$peso, data$sexo)
+  weights
+  sprintf("shapiro.test")
+  lapply(weights, shapiro.test)
+  sprintf("Density Table")
+  plot(density(weights$Hombre), lwd=3, col='blue',
+       xlim=c(30, 110), main='', las=1,
+       xlab='Weight (kg)', ylab='Density')
+  lines(density(weights$Mujer), lwd=3, col='deeppink')
+  legend('topleft', legend=c('Men', 'Women'),
+         lwd=3, col=c('blue', 'deeppink'), bty='n')
+  print("Normality of Densities")
+  
+  # NORMALITY TESTS FOR DENSITIES
+  par(mfrow=c(1, 2))
+  qqnorm(weights$Hombre, pch=20,
+         main='QQplot for Men's Weight')
+  qqline(weights$Hombre)
+  
+  qqnorm(weights$Mujer, pch=20,
+         main='QQplot for Women's Weight')
+  qqline(weights$Mujer)
+  
+  # LINEAR REGRESSION
+  sprintf("Correlation Coefficient Plot")
+  pairs(weights)
+  summary(data)
+  names(weights)
+  sprintf("Correlation Calculation")
+  cor(x=data$peso, y=data$altura)
+}
